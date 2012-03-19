@@ -103,7 +103,10 @@ def run(options):
         line = ser.readline().strip()
         logger.info(line)
         if udpSocket is not None:
-            udpSocket.send(line+'\r\n')
+            try:
+                udpSocket.send(line+'\r\n')
+            except:
+                pass
             
 
 def parseOptions():
