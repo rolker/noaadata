@@ -87,7 +87,6 @@ def run(options):
         uaddr = (uaddr,uport)
         udpSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         udpSocket.connect(uaddr)
-        udpSocket.send("hello\n")
     else:
         udpSocket = None
         
