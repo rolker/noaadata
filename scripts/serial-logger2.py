@@ -81,7 +81,7 @@ def run(options):
         ptsh.setFormatter(formatter)
         logger.addHandler(ptsh)
 
-    if options.udpTarget != '' and ':' in option.udpTarget:
+    if options.udpTarget != '' and ':' in options.udpTarget:
         uaddr,uport = options.udpTarget.split(':',1)
         uport = int(uport)
         uaddr = (uaddr,uport)
