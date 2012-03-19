@@ -26,7 +26,6 @@ default:
 	@echo
 	@echo " WARNING: this Makefile is for the maintainer.  See INSTALL"
 
-#	@echo "  trac      -  Open the TRAC wiki and bug system"
 #	@echo "  wikipedia -  Open the wikipedia entry on ${PKG}"
 
 #PYFILES_ALL := ${shell ls *.py}
@@ -43,12 +42,6 @@ variables:
 .PHONY: wikipedia
 wikipedia:
 	open http://en.wikipedia.org/wiki/Automatic_Identification_System
-
-#.PHONY: trac
-#trac:
-#	@echo "These only work inside of ccom.  sorry..."
-#	open https://albatross.ccom.nh/GeoZui4D/wiki/DevArea/${PKG}Info
-#	open https://albatross.ccom.nh/GeoZui4D
 
 .PHONY: help
 help:
@@ -96,6 +89,22 @@ check:
 #	pylint
 #	pychecker ${PKG} scripts
 
+build: test
+	@echo
+	@echo Building locally...
+	@echo
+	(cd ais;make)
+	(cd ais/sls;make)
+	(cd ais/ris;make)
+	-find . -name \*.pyc | xargs rm
+	rm -f MANIFEST
+	./setup.py build
+
+install-home: build
+	@echo
+	@echo Installing in home area...
+	@echo
+	./setup.py install --prefix ${HOME}
 
 # Why does MANIFEST get correctly rebuilt?
 sdist: test 
