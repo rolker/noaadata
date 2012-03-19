@@ -20,6 +20,7 @@ RUNASUSER=data
 DAEMON=/home/$RUNASUSER/bin/serial-logger
 PIDDIR=/var/run/data
 PIDFILE=$PIDDIR/logais.pid
+UDPOUT=localhost:2000
 
 
 test -x $DAEMON || echo "ERROR: can not find logger daemon: $DAEMON"  
@@ -44,7 +45,7 @@ case $1 in
 		fi
 		# FIX: make this read through a list of loggers to run with parameters
 		# How to control all of the loggers in batch or one at a time?
-  		start-stop-daemon --start --quiet --oknodo --chdir /home/${RUNASUSER}/projects/data/${SUBDIR}/ais --pidfile $PIDFILE --startas $DAEMON -c $RUNASUSER -- --pid-file $PIDFILE -l ais- -p /dev/ttyS2 --daemon --enable-tcp-out --timeout=300 --uscg-format --station-id=${STATION} -m
+  		start-stop-daemon --start --quiet --oknodo --chdir /home/${RUNASUSER}/projects/data/${SUBDIR}/ais --pidfile $PIDFILE --startas $DAEMON -c $RUNASUSER -- --pid-file $PIDFILE -l ais- -p /dev/ttyS2 --daemon --enable-tcp-out --timeout=300 --uscg-format --station-id=${STATION} -m --udp ${UDPOUT}
 		log_end_msg $?
   		;;
 	stop)
