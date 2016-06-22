@@ -74,27 +74,6 @@ check:
 #	pychecker ${PKG} scripts
 
 build: test
-<<<<<<< HEAD
-=======
-	@echo
-	@echo Building locally...
-	@echo
-	(cd ais;make)
-	(cd ais/sls;make)
-	(cd ais/ris;make)
-	-find . -name \*.pyc | xargs rm
-	rm -f MANIFEST
-	./setup.py build
-
-install-home: build
-	@echo
-	@echo Installing in home area...
-	@echo
-	./setup.py install --prefix ${HOME}
-
-# Why does MANIFEST get correctly rebuilt?
-sdist: test 
->>>>>>> ef499a389e88335cbd8ebd60add0bec4a6f09ce9
 	@echo
 	@echo Building locally...
 	@echo
